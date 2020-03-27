@@ -1,0 +1,123 @@
+html{
+    font-family: 'Open Sans', sans-serif;
+    background-color: rgb(246, 250, 253);
+}
+h1{
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(120, 136, 170);
+}
+p{
+    text-align: center;
+    margin: 0px 0px 10px 0px;
+}
+a:link{
+   text-decoration: none; 
+}
+
+table{
+    border-spacing: 10px;
+    width: 100%;
+}
+thead{
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+    color: rgb(84, 87, 107);
+}
+tbody{
+    color: #414131;
+}
+input[type="text"] {
+    width: 100%;
+    padding: 5px 10px 5px 0;
+    border-color: transparent;
+    border-radius: 5px;
+}
+input[type="date"] {
+    border-radius: 5px;
+    border-color: transparent;
+    font-family: 'Open Sans';
+}
+#container{
+    padding-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    height: 60vh;
+    width: 60vw;
+    margin: 0 auto;
+    transition: all 300ms ease-in-out;
+
+}
+
+#book-form{
+    border-radius: 10px;
+    position: fixed;
+    width: 250px;
+    padding-left: 20px;
+    padding-top: 30px;
+    left:-350px;
+    height: 100%;
+    transition: all 300ms ease-in-out;
+    background-color: rgb(145, 161, 233);
+}
+#book-form p{
+    text-align: left;
+    margin-right: 50px;
+}
+
+#submit-btn{
+    color: #fff;
+    background-color: rgb(107, 112, 139);
+    width: 50%;
+    border-radius: 5px;
+    border-color: transparent;
+    padding: 5px;
+    font-family: 'Open Sans';
+}
+
+#menu-toggle {
+    display: none;
+  }
+
+.menu-icon {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    font-size: 24px;
+    z-index: 1;
+    transition: all 300ms ease-in-out;
+  }
+  #menu-toggle:checked ~ #book-form {
+    left: 0px;
+  }
+  
+  #menu-toggle:checked + .menu-icon {
+    left: 230px;
+  }
+  
+  #menu-toggle:checked ~ .container{
+    padding-left: 190px;
+  }
+  #card{
+      background-color: #fff;
+      width: 200px;
+      height: 250px;
+      border-radius: 10px;
+      box-shadow: 5px 5px 18px -2px rgba(153,153,153,0.75);
+      overflow: hidden;
+      margin: 10px;
+  }
+    #card-stats{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 10px 0px 20px 10px;
+    color: rgb(238, 133, 133);
+  }
+
+  .delete-btn{
+      margin-left:150px;
+      text-decoration: none;
+  }
