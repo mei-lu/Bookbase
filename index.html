@@ -3,49 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reading List</title>
+    <title>Bookbase</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="/img/favicon.gif" type="image/x-icon">
+    <link rel="shortcut icon" href="/img/favicon.GIF" type="image/x-icon">
     <script src="https://kit.fontawesome.com/c61777eb01.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Bellota&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 </head>
 <body>
-    
-    <input type="checkbox" id="menu-toggle" />
-    <label for="menu-toggle" class="menu-icon"><i class="fas fa-plus"></i></i></label>
-    
-        <form id="book-form">
-            <p>
-                <label for="title">Title</label>
-                <input type="text" id="title" class="form-field" placeholder="e.g. Harry Potter" required>
-            </p>
-            
-            <p>
-                <label for="Author">Author</label>
-                <input type="text" id="author" class="form-field" placeholder="e.g. JK Rowling" required>
-            </p>
-            
-            <p>
-                <label for="Date">Finish Date</label>
-                <input type="date" id="date" class="form-field">
-            </p>
-    
-            <p>
-                <label for="like">Like</label>
-                <input type="checkbox" id="like" class="form-field">
-            </p>
-    
-            <input type="submit" value="Add Book" id="submit-btn">
-        </form>
-    
-
-    
-    <h1><i class="fas fa-book" style="color:rgb(158, 192, 211)"></i>Reading List</h1>
-    <p id="count">Total Read: 0</p>
-
-    <div id="container">
-
+    <input type="checkbox" id="user-toggle" />
+    <label for="user-toggle" class="user-icon"><i class="fas fa-info-circle"></i></label>
+    <div id="user-bar">
+        <p id="count">Total Read: 0</p>
     </div>
+
+    <input type="checkbox" id="add-toggle" />
+    <label for="add-toggle" class="add-icon"><i class="fas fa-plus"></i></i></label>
+    <div id="add-box">
+    <form id="book-form" style="padding-bottom: 25px">
+        <!--Add book form-->
+        <h2>Add a Book</h2>
+        <p>
+            <label for="title">Title</label>
+            <input type="text" id="title" class="form-field" placeholder="e.g. Harry Potter" required>
+        </p>
+    
+        <p>
+            <label for="Author">Author</label>
+            <input type="text" id="author" class="form-field" placeholder="e.g. J.K. Rowling" required>
+        </p>
+    
+        <p>
+            <label for="Date">Finish Date</label>
+            <input type="date" id="date" class="form-field" required>
+        </p>
+    
+        <p>
+            <label for="like">Favorite</label>
+            <input type="checkbox" id="like" class="form-field">
+        </p>
+    
+        <input type="submit" value="Add" id="submit-btn">
+    </form>
+
+    <!--Settings form-->
+    <hr>
+
+    <form id="settings-form">
+        <h2>Settings</h2>
+        <p>
+            <label for="name">Your Name</label>
+            <input type="text" id="form-name" class="form-field" placeholder="What is your name?" required>
+           </p>  
+       <p>
+        <label for="title">Reading Goal</label>
+        <input type="number" id="form-goal" class="form-field" placeholder="e.g. 10" required>
+       </p>
+       <input type="submit" value="Save" id="save-btn">     
+    </form>
+    </div>
+
+    <h1><i class="fas fa-book" style="color:rgb(158, 192, 211); padding-right: 10px;"></i>Bookbase</h1>
+    
+    
+    <div id="container">
+    </div>
+
+    
     <script src="app.js"></script>
+
+
 </body>
 </html>

@@ -4,7 +4,7 @@ localStorage.setItem('books', JSON.stringify(booksArr));
 
 //Book object
 class Book{
-    constructor(title, author, date, liked) {
+        constructor(title, author, date, liked) {
         this.title = title;
         this.author = author;
         this.date = date;
@@ -15,9 +15,7 @@ class Book{
 //Handles adding and displaying the books to form
 class UI {
     static displayBooks() {
-
         const books = booksArr;
-
         books.forEach((book) => UI.addBook(book));
     }
 
@@ -27,16 +25,22 @@ class UI {
     }
 
     static deleteBook(selection, title){
-            selection.remove();
-            count--;
-            document.getElementById('count').innerHTML= `Total Read: ${count}`;
-            for (var i = 0; i < booksArr.length; i++){
-                if(booksArr[i].title == title){
-                    booksArr.splice(i, 1);
+        const toRemove = selection.parentElement;
+        toRemove.classList.remove('fadeIn');
+        toRemove.classList.add('animated', 'fadeOut');
+        toRemove.classList.add('faster');
+
+        toRemove.addEventListener('animationend', (e) => { toRemove.remove(); });
+
+        count--;
+        document.getElementById('count').innerHTML= `Total Read: ${count}`;
+        for (var i = 0; i < booksArr.length; i++){
+            if(booksArr[i].title == title){
+                booksArr.splice(i, 1);
                     
-                }
             }
-            localStorage.setItem('books', JSON.stringify(booksArr));
+        }
+        localStorage.setItem('books', JSON.stringify(booksArr));
     }
 
     static addBook(book) {
@@ -49,20 +53,21 @@ class UI {
         //Check if the book is liked, and selects heart icon
         if(book.liked == true){
             newCard.innerHTML = `
-            <div id="card-stats"><i class="fas fa-heart" ></i><a class="delete-btn" href='#'>x</a></div>
-                <p id="card-title">${book.title}</p>
-                <p id="card-author">${book.author}</p>
-                <p id="card-date">${book.date}</p>
-            </div>`;
+                <div id="card-stats"><i id="heart-icon" class="fas fa-heart" ></i><a class="delete-btn" href='#'>x</a></div>
+                    <p id="card-title" style="font-size:18px;">${book.title}</p>
+                    <p id="card-author" style="font-size:13px;">by ${book.author}</p>
+                    <p id="card-date" style="font-size:11px;">Completed | ${book.date}</p>
+                </div>`;
             }
             else{
             newCard.innerHTML = `
-            <div id="card-stats"><i class="far fa-heart"></i><a class="delete-btn" href='#'>x</a></div>
-                <p id="card-title">${book.title}</p>
-                <p id="card-author">${book.author}</p>
-                <p id="card-date">${book.date}</p>
-            </div>`;
+                <div id="card-stats"><i id="heart-icon" class="far fa-heart"></i><a class="delete-btn" href='#'>x</a></div>
+                    <p id="card-title" style="font-size:18px;">${book.title}</p>
+                    <p id="card-author" style="font-size:13px;">by ${book.author}</p>
+                    <p id="card-date" style="font-size:11px;">Completed | ${book.date}</p>
+                </div>`;
             }
+        newCard.classList.add('animated', 'fadeIn');
         container.appendChild(newCard);
     }
 }
@@ -90,11 +95,28 @@ e.preventDefault();
 if(document.getElementById('container')){
     document.getElementById('container').addEventListener('click', (e) =>{
         const title = e.target.parentElement.parentElement.getElementsByTagName('p').namedItem('card-title').textContent;
-        const selection = e.target.parentElement.parentElement;
-        console.log(selection);
-        console.log(title);
-        if (selection != document.getElementById('container') && selection != document.getElementsByTagName("body")[0] && selection != document.getElementsByTagName("html")[0]){
-        UI.deleteBook(selection, title);
+        const target = e.target;
+        if (target.parentElement.id == 'card-stats' && (target.className == 'delete-btn')){
+            let selection = target.parentElement;
+            UI.deleteBook(selection, title);
         }
     });
 }
+
+document.addEventListener('click', (e) => {
+    if(e.target && e.target.id == 'heart-icon'){
+        const heart = e.target;
+        console.log(heart.className)
+        if(heart.className == 'fas fa-heart'){
+            heart.classList.remove('fas');
+            heart.classList.remove('fa-heart');
+            heart.classList.add('far');
+            heart.classList.add('fa-heart');
+        }else{
+            heart.classList.remove('far');
+            heart.classList.remove('fa-heart');
+            heart.classList.add('fas');
+            heart.classList.add('fa-heart');
+        }
+    }
+});
