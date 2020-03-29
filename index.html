@@ -11,10 +11,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 </head>
 <body>
-    <input type="checkbox" id="user-toggle" />
-    <label for="user-toggle" class="user-icon"><i class="fas fa-info-circle"></i></label>
+
     <div id="user-bar">
-        <p id="count">Total Read: 0</p>
+        <div id="user-info">
+            <h2 id="user-greeting">Hi There!</h2>
+            <img src="/img/defaultpfp.jpg" id="profile-pic">
+
+            <p id="count">Total Read: 0</p>
+            <p id="goal">Reading Goal: 0</p>
+            <p id="progress">Set a reading goal!</p>
+        </div>
     </div>
 
     <input type="checkbox" id="add-toggle" />
@@ -63,15 +69,14 @@
     </form>
     </div>
 
-    <h1><i class="fas fa-book" style="color:rgb(158, 192, 211); padding-right: 10px;"></i>Bookbase</h1>
     
-    
-    <div id="container">
+    <div id="contents">
+        <h1 class="header"><i class="fas fa-book" style="padding-right: 10px;"></i>Bookbase</h1>
+        <div id="container">
+        </div>
     </div>
 
-    
     <script src="app.js"></script>
-
 
 </body>
 </html>

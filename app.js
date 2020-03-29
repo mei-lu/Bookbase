@@ -1,5 +1,11 @@
 let count = 0;
-let booksArr = localStorage.getItem('books') ? JSON.parse(localStorage.getItem('books')) : [];
+let bookGoal = localStorage.getItem('bookGoal') ? localStorage.getItem('bookGoal') : 0;
+let name = localStorage.getItem('username') ? localStorage.getItem('username') : "You";
+
+let booksArr = localStorage.getItem('books') ? JSON.parse(localStorage.getItem('books')) : JSON.parse([{title: "Sample Book",
+author: "Try adding a book!",
+date: "2020-03-12",
+liked: true}]);
 localStorage.setItem('books', JSON.stringify(booksArr));
 
 //Book object
@@ -17,6 +23,10 @@ class UI {
     static displayBooks() {
         const books = booksArr;
         books.forEach((book) => UI.addBook(book));
+        document.getElementById('user-greeting').innerHTML = `Hi ${name}!`
+        document.getElementById('goal').innerHTML= `Reading Goal: ${bookGoal} books`
+
+        console.log(booksArr);
     }
 
     static clearFields(){
@@ -34,6 +44,8 @@ class UI {
 
         count--;
         document.getElementById('count').innerHTML= `Total Read: ${count}`;
+        if(bookGoal != 0) document.getElementById('progress').innerHTML= `You're ` + Math.round((count/bookGoal)*100) + `% there!`;
+
         for (var i = 0; i < booksArr.length; i++){
             if(booksArr[i].title == title){
                 booksArr.splice(i, 1);
@@ -45,6 +57,7 @@ class UI {
 
     static addBook(book) {
         count++;
+        if(bookGoal != 0) document.getElementById('progress').innerHTML= `You're ` + Math.round((count/bookGoal)*100) + `% there!`;
         document.getElementById('count').innerHTML= `Total Read: ${count}`;
         const container = document.getElementById('container');
         let newCard = document.createElement('div');
@@ -53,7 +66,7 @@ class UI {
         //Check if the book is liked, and selects heart icon
         if(book.liked == true){
             newCard.innerHTML = `
-                <div id="card-stats"><i id="heart-icon" class="fas fa-heart" ></i><a class="delete-btn" href='#'>x</a></div>
+            <div id="card-stats"><i id="heart-icon" class="fas fa-heart" ></i><a class="delete-btn" href='#'>x</a></div>
                     <p id="card-title" style="font-size:18px;">${book.title}</p>
                     <p id="card-author" style="font-size:13px;">by ${book.author}</p>
                     <p id="card-date" style="font-size:11px;">Completed | ${book.date}</p>
@@ -91,6 +104,28 @@ e.preventDefault();
     UI.addBook(newBook);
     UI.clearFields();
 });
+
+/*Set name and reading goals */
+document.getElementById('settings-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    name = document.getElementById('form-name').value;
+    document.getElementById('user-greeting').innerHTML = `Hi ${name}!`
+    localStorage.setItem('username', name);
+
+    bookGoal = document.getElementById('form-goal').value;
+    localStorage.setItem('bookGoal', bookGoal);
+    if(bookGoal != 0){
+        document.getElementById('progress').innerHTML= `You're ` + Math.round((count/bookGoal)*100) + `% there!`;
+    }
+    else{
+        document.getElementById('progress').innerHTML= `Set a reading goal!`;
+    }
+
+    document.getElementById('goal').innerHTML= `Reading Goal: ${bookGoal}`
+
+});
+
 
 if(document.getElementById('container')){
     document.getElementById('container').addEventListener('click', (e) =>{
