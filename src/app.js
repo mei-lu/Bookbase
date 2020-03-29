@@ -2,10 +2,15 @@ let count = 0;
 let bookGoal = localStorage.getItem('bookGoal') ? localStorage.getItem('bookGoal') : 0;
 let name = localStorage.getItem('username') ? localStorage.getItem('username') : "There, set a name";
 
-let booksArr = localStorage.getItem('books') ? JSON.parse(localStorage.getItem('books')) : JSON.parse([{title: "Sample Book",
+
+let sampleArr = [{title: "Sample Book",
 author: "Try adding a book!",
 date: "2020-03-12",
-liked: true}]);
+liked: true}];
+
+
+
+let booksArr = localStorage.getItem('books') ? JSON.parse(localStorage.getItem('books')) : [];
 localStorage.setItem('books', JSON.stringify(booksArr));
 
 //Book object
@@ -25,8 +30,6 @@ class UI {
         books.forEach((book) => UI.addBook(book));
         document.getElementById('user-greeting').innerHTML = `Hi ${name}!`
         document.getElementById('goal').innerHTML= `Reading Goal: ${bookGoal} books`
-
-        console.log(booksArr);
     }
 
     static clearFields(){

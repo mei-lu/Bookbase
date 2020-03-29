@@ -1,11 +1,11 @@
 let count = 0;
 let bookGoal = localStorage.getItem('bookGoal') ? localStorage.getItem('bookGoal') : 0;
-let name = localStorage.getItem('username') ? localStorage.getItem('username') : "You";
-
-let booksArr = localStorage.getItem('books') ? JSON.parse(localStorage.getItem('books')) : JSON.parse([{title: "Sample Book",
+let name = localStorage.getItem('username') ? localStorage.getItem('username') : "there, set a name";
+const sampleArr = [{title: "Sample Book",
 author: "Try adding a book!",
 date: "2020-03-12",
-liked: true}]);
+liked: true}]
+let booksArr = localStorage.getItem('books') ? JSON.parse(localStorage.getItem('books')) : sampleArr;
 localStorage.setItem('books', JSON.stringify(booksArr));
 
 //Book object
@@ -154,4 +154,18 @@ document.addEventListener('click', (e) => {
             heart.classList.add('fa-heart');
         }
     }
+    const title = e.target.parentElement.parentElement.getElementsByTagName('p').namedItem('card-title').textContent;
+    for (var i = 0; i < booksArr.length; i++){
+        if(booksArr[i].title == title){
+            if(booksArr[i].liked == true){
+                booksArr[i].liked = false;
+            }
+            else{
+                booksArr[i].liked = true;
+            }
+                
+        }
+    }
+    localStorage.setItem('books', JSON.stringify(booksArr));
+
 });
